@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e666212c1cbc24281bb4c830aedb4a, type: 3}
+  m_Name: GameManager
+  m_EditorClassIdentifier: 
+  zkey: 122
+  skey: 115
+  dkey: 100
+  qkey: 113
+  akey: 97
+  ekey: 101
+  fkey: 102
+  rkey: 114
+  lshiftkey: 304
+  laltkey: 308
+  lctrlkey: 306
+  alpha0key: 48
+  alpha1key: 49
+  alpha2key: 50
+  alpha3key: 51
+  alpha4key: 52
+  alpha5key: 53
+  alpha6key: 54
+  alpha7key: 55
+  alpha8key: 56
+  alpha9key: 57
+  lmb: 0
+  mmb: 2
+  rmb: 1
+  doublePressMaxTime: 0.2
+  doubleClickMaxTime: 0.2
+  OutlineFillMaterial: {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
+  OutlineMaskMaterial: {fileID: 2100000, guid: 106f3ff43a17d4967a2b64c7a92e49ec, type: 2}
+  currentMainCamera: {fileID: 0}
+  currentMainCanvas: {fileID: 0}
+  IM: {fileID: 0}
+  currentMainHandler: {fileID: 0}
+  currentTerrainHandler: {fileID: 0}
