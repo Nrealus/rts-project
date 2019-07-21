@@ -26,7 +26,6 @@ namespace Core
         }
 
         public List<SelectableFacade> knownSelectablesList;
-        // TODO : "garbage collect manually" over time elements (selectablefacade) which have a null selectableObject, as they are still "used" and won't be collected by the GC.
 
         //-----------------------------------------------------------------------------------------------------//
 
