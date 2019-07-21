@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GlobalManagers;
-using VariousUtilsExtensions;
+using UtilsAndExts;
 // This components must be attached on a camera. The camera will be then controllable by the player as an "RTS camera".
 
 namespace Core

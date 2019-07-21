@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using VariousUtilsExtensions;
+using UtilsAndExts;
 using GlobalManagers;
 
 namespace SOGui

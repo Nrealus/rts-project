@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VariousUtilsExtensions
+namespace UtilsAndExts
 {
     public static class UIUtils
     {
@@ -107,18 +107,18 @@ namespace VariousUtilsExtensions
         /// <summary>
         /// Returns box bounds in viewport coordinates based on 2 screen positions and the Camera we're looking through.
         /// </summary>
-        /// <param name="camera"></param>
+        /// <param name="concernedCamera"></param>
         /// <param name="screenPosition1"></param>
         /// <param name="screenPosition2"></param>
         /// <returns></returns>
-        public static Bounds GetViewportBounds(Camera camera, Vector3 screenPosition1, Vector3 screenPosition2)
+        public static Bounds GetViewportBounds(Camera concernedCamera, Vector3 screenPosition1, Vector3 screenPosition2)
         {
-            var v1 = camera.ScreenToViewportPoint(screenPosition1);
-            var v2 = camera.ScreenToViewportPoint(screenPosition2);
+            var v1 = concernedCamera.ScreenToViewportPoint(screenPosition1);
+            var v2 = concernedCamera.ScreenToViewportPoint(screenPosition2);
             var min = Vector3.Min(v1, v2);
             var max = Vector3.Max(v1, v2);
-            min.z = camera.nearClipPlane;
-            max.z = camera.farClipPlane;
+            min.z = concernedCamera.nearClipPlane;
+            max.z = concernedCamera.farClipPlane;
 
             var bounds = new Bounds();
             bounds.SetMinMax(min, max);
