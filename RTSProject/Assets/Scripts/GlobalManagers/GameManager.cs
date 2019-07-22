@@ -56,7 +56,7 @@ namespace GlobalManagers
         [HideInInspector] public Core.RTSCameraRig currentMainCamera;
         [HideInInspector] public Canvas currentMainCanvas;
         [HideInInspector] public InputManager IM;
-        [HideInInspector] public Core.GameHandlers.MainHandler currentMainHandler;
+        [HideInInspector] public Core.MainHandler currentMainHandler;
 
         //optional (but recommended)
         //this method will run before the first scene is loaded. Initializing the singleton here
@@ -84,7 +84,7 @@ namespace GlobalManagers
 
             currentMainCamera = FindObjectOfType<Core.RTSCameraRig>();
             currentMainCanvas = FindObjectOfType<Canvas>();
-            currentMainHandler = FindObjectOfType<Core.GameHandlers.MainHandler>();
+            currentMainHandler = FindObjectOfType<Core.MainHandler>();
 
             currentMainHandler.Init();
 

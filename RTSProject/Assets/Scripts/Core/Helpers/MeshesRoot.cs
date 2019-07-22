@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core
-{
-    namespace Helpers
+namespace Core.Helpers
+{ 
+    public class MeshesRoot : MonoBehaviour
     {
-        public class MeshesRoot : MonoBehaviour
-        {
 
 
-        }
     }
 }

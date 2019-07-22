@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Core.Faction;
+using Core.Selection;
+using Gamelogic.Extensions;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Core.Selection;
+using System.Collections.ObjectModel;
 using System.Linq;
-using UtilsAndExts;
-using GlobalManagers;
-using Core.Faction;
+using UnityEngine;
 
 namespace Core
 {
@@ -16,17 +15,33 @@ namespace Core
         /// <summary>
         /// A container used to group minimal required data and to decouple Selectable code with high-level selection management.
         /// </summary>
-        public class SelectableFacade
+        private class SelectableFacade
         {
             public Selectable selectableObject;
-            public bool selected;
+            public ObservedValue<bool> selected;
             // DIFFERENT IDEAS
             // public int groupID;
             // public SelectableGroup group
+
+            public void Init(Selectable selectableObjectValue, bool selectedValue)
+            {
+                selectableObject = selectableObjectValue;
+
+                selected = new ObservedValue<bool>(!selectedValue);
+                selected.OnValueChange += () =>
+                {
+                    SelectionHandler.UpdateCurrentlySelectedUnits();
+                };
+                selected.Value = selectedValue;
+
+            }
         }
 
-        public List<SelectableFacade> knownSelectablesList;
+        private readonly static List<SelectableFacade> _knownSelectablesList = new List<SelectableFacade>();
 
+        private static List<Selectable> _currentlySelected;
+        public static ReadOnlyCollection<Selectable> CurrentlySelectedReadonly { get; private set; }
+        
         //-----------------------------------------------------------------------------------------------------//
 
         ///<summary>
@@ -35,34 +50,60 @@ namespace Core
         /// </summary>
         public void Init()
         {
-            knownSelectablesList = new List<SelectableFacade>();
+            _currentlySelected = new List<Selectable>();
+            CurrentlySelectedReadonly = _currentlySelected.AsReadOnly();
         }
-        
+
         private void Start()
         {
             StartCoroutine(CollectSelectablesHashSet());
         }
 
+        public void Update()
+        {
+            Debug.Log(CurrentlySelectedReadonly.Count);
+        }
+
         //-----------------------------------------------------------------------------------------------------//
 
         /// <summary>
-        /// Returns a list of all currently selected Selectables.
+        /// Updates the list of all currently selected Selectables.
         /// </summary>
-        public List<Selectable> GetCurrentlySelectedUnits()
+        public static void UpdateCurrentlySelectedUnits()
         {
-            return knownSelectablesList
-                .Where(facade => (facade.selected == true && facade.selectableObject != null))
+            _currentlySelected = _knownSelectablesList
+                .Where(facade => (facade.selected.Value == true && facade.selectableObject != null))
+                .Select(facade => facade.selectableObject)
+                .ToList();
+
+            CurrentlySelectedReadonly = _currentlySelected.AsReadOnly();
+        }
+
+        public static List<Selectable> GetCurrentlySelectedUnitsFromFaction(FactionData faction)
+        {
+            return _knownSelectablesList
+                .Where(facade => (facade.selected.Value == true && facade.selectableObject != null
+                                    && facade.selectableObject.myFactionAffiliation.MyFaction == faction))
                 .Select(facade => facade.selectableObject)
                 .ToList();
         }
 
-        public List<Selectable> GetCurrentlySelectedUnitsFromFaction(FactionData faction)
+        public static void SelectionCallback(Selectable entry, bool updatedSelected)
         {
-            return knownSelectablesList
-                .Where(facade => (facade.selected == true && facade.selectableObject != null 
-                                    && facade.selectableObject.myFactionAffiliation.MyFaction == faction))
-                .Select(facade => facade.selectableObject)
-                .ToList();
+            var temp = _knownSelectablesList.Where(facade => (facade.selectableObject == entry));
+            bool entryExistsAlready = temp.Any();
+
+            if (entryExistsAlready)
+            {
+                temp.FirstOrDefault().selected.Value = updatedSelected;
+            }
+            else
+            {
+                // this order is important !!
+                var facade = new SelectableFacade();
+                _knownSelectablesList.Add(facade);
+                facade.Init(entry, updatedSelected);
+            }
         }
 
         //-----------------------------------------------------------------------------------------------------//
@@ -74,23 +115,25 @@ namespace Core
         /// <returns></returns>
         private IEnumerator CollectSelectablesHashSet()
         {
-            for (int i = 0;  ; i++)
+            for (int i = 0; ; i++)
             {
-                var c = knownSelectablesList.Count;
+                var c = _knownSelectablesList.Count;
                 if (c > 0)
                 {
                     if (i >= c)
                         i = 0;
 
-                    if (knownSelectablesList[i].selectableObject == null)
+                    if (_knownSelectablesList[i].selectableObject == null)
                     {
-                        knownSelectablesList.RemoveAt(i);
+                        _knownSelectablesList[i].selectableObject = null; // needed ?
+                        _knownSelectablesList[i].selected.Clear();
+                        _knownSelectablesList.RemoveAt(i);
                         i--;
                     }
                 }
 
                 yield return new WaitForSeconds(3);
-            }            
+            }
         }
 
         //-----------------------------------------------------------------------------------------------------//

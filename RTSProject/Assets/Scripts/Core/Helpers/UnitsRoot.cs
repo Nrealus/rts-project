@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core
+namespace Core.Helpers
 {
-    namespace Helpers
+    public class UnitsRoot : MonoBehaviour
     {
-        public class UnitsRoot : MonoBehaviour
-        {
 
-        }
     }
 }
