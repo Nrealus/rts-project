@@ -61,7 +61,7 @@ namespace Core
 
         public void Update()
         {
-            Debug.Log(CurrentlySelectedReadonly.Count);
+            //Debug.Log(CurrentlySelectedReadonly.Count);
         }
 
         //-----------------------------------------------------------------------------------------------------//

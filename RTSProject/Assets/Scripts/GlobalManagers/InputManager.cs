@@ -212,9 +212,18 @@ namespace GlobalManagers
         [HideInInspector] public bool[] IsMouseButtonDoublePressed { get; private set; }
         [HideInInspector] public bool[] IsMouseButtonReleased { get; private set; }
 
-        [HideInInspector] public float MouseScroll { get; private set; } // Basically Input.GetAxis("Mouse ScrollWheel").
-        [HideInInspector] public Vector3 MousePosition { get; private set; } // The mouse's screen position.
-        [HideInInspector] public Vector3 MouseLastClickPosition { get; private set; } // The mouse's screen position.
+        /// <summary>
+        /// Basically Input.GetAxis("Mouse ScrollWheel").
+        /// </summary>
+        [HideInInspector] public float MouseScroll { get; private set; }
+        /// <summary>
+        /// The mouse's screen position.
+        /// </summary>
+        [HideInInspector] public Vector3 MousePosition { get; private set; }
+        /// <summary>
+        /// The mouse's last click screen position. (Doesn't work yet)
+        /// </summary>
+        [HideInInspector] public Vector3 MouseLastClickPosition { get; private set; }
 
         private int[] numberOfClicks; // Number of clicks in short amount of time (doublePressMaxTime) per mouse button.
         private float[] clicksTimer; // Button clicking reset timer for each mouse button.
@@ -318,7 +327,7 @@ namespace GlobalManagers
         // Update input states
         private void Update()
         {
-
+            
             for (int i = 0; i < keysUsed.Count; i++)
             {
                 IsKeyHeld[i] = Input.GetKey(keysUsed[i]);
@@ -341,7 +350,7 @@ namespace GlobalManagers
             }
 
             DoubleAndSimplePressesUpdate();
-
+            
         }
 
         private void OnGUI() // TODO : performance ????
