@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &438638802334269477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4154790138316393883}
+  - component: {fileID: 549102991327696696}
+  - component: {fileID: 1183088186959501521}
+  - component: {fileID: 7191397201357305989}
+  - component: {fileID: 7620140098264375665}
+  - component: {fileID: 8395954196561124367}
+  m_Layer: 0
+  m_Name: Mov Control
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4154790138316393883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438638802334269477}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &549102991327696696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438638802334269477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb9a5a43e77098646ae2fb6af525cda2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainRigidBody: {fileID: 0}
+  halfHeight: 0.4
+  halfWidth: 0.7
+  velocityController: {fileID: 8395954196561124367}
+  axleInfos:
+  - leftWheel: {fileID: 0}
+    rightWheel: {fileID: 0}
+    motor: 0
+    steering: 1
+  - leftWheel: {fileID: 0}
+    rightWheel: {fileID: 0}
+    motor: 1
+    steering: 0
+  maxMotorTorque: 400
+  maxBrakeTorque: 1500
+  maxSteeringAngle: 30
+  maxVelocity: 7
+  accelRate: 0.5
+  reverseAccel: 0.3
+  minThrottle: -0.7
+  maxThrottle: 1
+  proximityDistance: 0.5
+  reversingRadiusLowBound: 1
+  reversingRadiusHighBound: 3
+  maxDistanceBeforeResettingToClosestWp: 5
+  maxAngleNoReverse: 25
+  maxAngleReverse: 40
+  angleMarginOrientationAtLastWp: 10
+--- !u!114 &1183088186959501521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438638802334269477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
+--- !u!114 &7191397201357305989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438638802334269477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  smoothType: 0
+  subdivisions: 2
+  iterations: 2
+  strength: 0.5
+  uniformLength: 1
+  maxSegmentLength: 2
+  bezierTangentLength: 0.4
+  offset: 0.2
+  factor: 0.1
+--- !u!114 &7620140098264375665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438638802334269477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b090bec917bbe4c3bbc612ef13f7c4a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  useRaycasting: 1
+  mask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  thickRaycast: 1
+  thickRaycastRadius: 1.5
+  use2DPhysics: 0
+  raycastOffset: {x: 0, y: 0.4, z: 0}
+  useGraphRaycasting: 1
+  quality: 1
+--- !u!114 &8395954196561124367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438638802334269477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67a8cbbf17e46343b09fc19d73e7e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pidName: MaxVelocityControl
+  Kp: 1
+  Ki: 0
+  Kd: 0.1
+  SliderKpMin: 0
+  SliderKpMax: 50
+  SliderKiMin: 0
+  SliderKiMax: 100
+  SliderKdMin: 0
+  SliderKdMax: 1
+  ShowSliderPanel: 0
+  SliderPanelX: 0
+  SliderPanelY: 0
