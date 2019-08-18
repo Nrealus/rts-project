@@ -13,7 +13,7 @@ namespace Core.VehicleMovement
     public class GroundVehicleAIController : MonoBehaviour
     {
 
-        public struct InternalPath
+        private struct InternalPath
         {
             public float halfHeight;
             private ABPath pathObj;
@@ -195,7 +195,7 @@ namespace Core.VehicleMovement
             */
         }
 
-        public InternalPath currentPath;
+        private InternalPath currentPath;
 
 #pragma warning disable CS0649
 
@@ -206,8 +206,10 @@ namespace Core.VehicleMovement
         private Terrain terrain;
         public bool onGround;
 
-        private bool reversing = false;
-        private bool goingBackwards = false;
+        private bool reversing;
+
+        public bool goingBackwards;
+        public bool pausedCourse;
 
         [SerializeField] private PID angleController;
         [SerializeField] private float angleErrorClampValue;
@@ -299,7 +301,7 @@ namespace Core.VehicleMovement
             {
                 mainRigidBody.AddRelativeForce(-1 * mainRigidBody.transform.up, ForceMode.Acceleration);
 
-                if (currentPath.ActualPathExists())
+                if (!pausedCourse && currentPath.ActualPathExists())
                 {
 
                     targetThrottle = (!reversing) ? maxThrottle : minThrottle;
@@ -317,7 +319,7 @@ namespace Core.VehicleMovement
                     var mult = anglePIDKmultFromThrottleRatio.Evaluate(tratio);
                     float torqueCorrectionForAngle = angleController.GetOutput(angleError, dt, mult, mult, mult);
 
-                    float angularVelocityError = Mathf.Clamp(Vector3.Dot(angularVelocity, mainRigidBody.transform.up), - maxAngularVelocity/2, maxAngularVelocity/2);
+                    float angularVelocityError = Mathf.Clamp(Vector3.Dot(angularVelocity, mainRigidBody.transform.up), -maxAngularVelocity / 2, maxAngularVelocity / 2);
                     float torqueCorrectionForAngularVelocity = angularVelocityController.GetOutput(angularVelocityError, dt, mult, mult, mult);
 
                     float velocityError = maxVelocity - velocityMagnitude;
@@ -337,18 +339,7 @@ namespace Core.VehicleMovement
                     {
                         force *= Mathf.Min(forceCorrectionForVelocity, 0.99f);
                     }
-                    /*           
-                    if (torque.magnitude > 10000)
-                    {
-                        torque = Vector3.zero;
-                        mainRigidBody.velocity = Vector3.zero;
-                    }
-                    if (force.magnitude > 10000)
-                    {
-                        force = Vector3.zero;
-                        mainRigidBody.velocity = Vector3.zero;
-                    }
-                    */
+
                     mainRigidBody.AddTorque(torque, ForceMode.Acceleration);
 
                     mainRigidBody.AddForce(force, ForceMode.Acceleration);
@@ -358,15 +349,11 @@ namespace Core.VehicleMovement
                 {
                     targetThrottle = 0;
                 }
-                var slipReductionForce = -slipReductionFactor * Vector3.Project(velocity, mainRigidBody.transform.right) / dt; // slip / traction reduction
-                /*
-                if (slipReductionForce.magnitude > 10000)
+                if (slipReductionFactor != 0)
                 {
-                    slipReductionForce = Vector3.zero;
-                    mainRigidBody.velocity = Vector3.zero;
+                    var slipReductionForce = -slipReductionFactor * Vector3.Project(velocity, mainRigidBody.transform.right) / dt; // slip / traction reduction
+                    mainRigidBody.AddForce(slipReductionForce, ForceMode.Acceleration);
                 }
-                */
-                mainRigidBody.AddForce(slipReductionForce, ForceMode.Acceleration);
             }
             else
             {
@@ -376,7 +363,7 @@ namespace Core.VehicleMovement
 
         private void UpdatePathtrackingLogic()
         {
-            if (currentPath.ActualPathExists())
+            if (!pausedCourse && currentPath.ActualPathExists())
             {
                                 
                 //currentPath.SetFirstWaypoint();

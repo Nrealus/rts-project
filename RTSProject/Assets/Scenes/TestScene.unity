@@ -839,7 +839,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1803295894}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1309118031
 MonoBehaviour:
@@ -981,6 +981,62 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e3ed22043631f4449fc162a6804d43b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1530567609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1530567610}
+  - component: {fileID: 1530567611}
+  - component: {fileID: 1530567612}
+  m_Layer: 0
+  m_Name: OrderHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1530567610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530567609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1803295894}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1530567611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530567609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8059b7dfb78476a46914f81de6dfba95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1530567612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530567609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b58b53aedd2c149b9b83a7b8e8817f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1574573503
@@ -1284,6 +1340,7 @@ Transform:
   - {fileID: 2046475669}
   - {fileID: 1574573504}
   - {fileID: 1397145782}
+  - {fileID: 1530567610}
   - {fileID: 1309118030}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -1354,51 +1411,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8161302432558116845, guid: 1047ad4d5fd129f49b0c73d2db135445,
-        type: 3}
-      propertyPath: _maxVelocity
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8161302432558116845, guid: 1047ad4d5fd129f49b0c73d2db135445,
-        type: 3}
-      propertyPath: _maxReverseVelocity
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8161302432558116845, guid: 1047ad4d5fd129f49b0c73d2db135445,
-        type: 3}
-      propertyPath: accelRate
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8161302432558116845, guid: 1047ad4d5fd129f49b0c73d2db135445,
-        type: 3}
-      propertyPath: reverseAccel
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8161302432558116845, guid: 1047ad4d5fd129f49b0c73d2db135445,
-        type: 3}
-      propertyPath: _maxAngularVelocity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8161302432558116845, guid: 1047ad4d5fd129f49b0c73d2db135445,
-        type: 3}
-      propertyPath: reversingRadiusHighBound
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8161302432558116845, guid: 1047ad4d5fd129f49b0c73d2db135445,
-        type: 3}
-      propertyPath: proximityDistance
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8161302432558116845, guid: 1047ad4d5fd129f49b0c73d2db135445,
-        type: 3}
-      propertyPath: reversingRadiusLowBound
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8161302432558116845, guid: 1047ad4d5fd129f49b0c73d2db135445,
-        type: 3}
-      propertyPath: maxSteeringAngle
-      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1047ad4d5fd129f49b0c73d2db135445, type: 3}
@@ -1491,6 +1503,7 @@ MonoBehaviour:
   terrainHandler: {fileID: 0}
   factionHandler: {fileID: 0}
   selectionHandler: {fileID: 0}
+  orderHandler: {fileID: 0}
 --- !u!4 &2121970482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8259196717473246362, guid: 1047ad4d5fd129f49b0c73d2db135445,

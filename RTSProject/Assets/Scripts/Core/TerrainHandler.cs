@@ -7,11 +7,7 @@ namespace Core
     {
         [HideInInspector] public Terrain MyTerrain { get; private set; }
 
-        ///<summary>
-        /// Called from the Init of MainHandler or Awake of the GameManager singleton
-        /// There needs to be a stable order in initializations, which is why we use this instead of Start and Awake to initialize stuff.
-        /// </summary>
-        public void Init()
+       public void Init()
         {
             try
             {

@@ -125,7 +125,7 @@ WheelCollider:
   m_SuspensionDistance: 0.1
   m_ForceAppPointDistance: 0.55
   m_Mass: 25
-  m_WheelDampingRate: 5
+  m_WheelDampingRate: 20
   m_ForwardFriction:
     m_ExtremumSlip: 0.3
     m_ExtremumValue: 1
@@ -342,7 +342,7 @@ WheelCollider:
   m_SuspensionDistance: 0.1
   m_ForceAppPointDistance: 0.55
   m_Mass: 25
-  m_WheelDampingRate: 5
+  m_WheelDampingRate: 20
   m_ForwardFriction:
     m_ExtremumSlip: 0.3
     m_ExtremumValue: 1
@@ -1105,6 +1105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8259196717473246362}
   - component: {fileID: 131433996592140699}
+  - component: {fileID: 599799846321004695}
   m_Layer: 0
   m_Name: Test Unit W
   m_TagString: Untagged
@@ -1140,12 +1141,24 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1500
   m_Drag: 0.3
-  m_AngularDrag: 0.4
+  m_AngularDrag: 0.3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &599799846321004695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8259196717473246367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2111bf7764fad48b0c02f0131729d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8259196718127912797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,7 +1284,7 @@ WheelCollider:
   m_SuspensionDistance: 0.1
   m_ForceAppPointDistance: 0.55
   m_Mass: 25
-  m_WheelDampingRate: 5
+  m_WheelDampingRate: 20
   m_ForwardFriction:
     m_ExtremumSlip: 0.3
     m_ExtremumValue: 1
@@ -1332,7 +1345,7 @@ WheelCollider:
   m_SuspensionDistance: 0.1
   m_ForceAppPointDistance: 0.55
   m_Mass: 25
-  m_WheelDampingRate: 5
+  m_WheelDampingRate: 20
   m_ForwardFriction:
     m_ExtremumSlip: 0.3
     m_ExtremumValue: 1
@@ -1471,7 +1484,7 @@ PrefabInstance:
     - target: {fileID: 549102991327696696, guid: 00c8ea5bd4fb37947b9f340e7f11d01f,
         type: 3}
       propertyPath: _maxAngularVelocity
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 549102991327696696, guid: 00c8ea5bd4fb37947b9f340e7f11d01f,
         type: 3}

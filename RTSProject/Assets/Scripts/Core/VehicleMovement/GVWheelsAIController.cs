@@ -6,6 +6,7 @@ using GlobalManagers;
 using UtilsAndExts;
 using System.Linq;
 using Gamelogic.Extensions;
+using Core.Orders;
 
 namespace Core.VehicleMovement
 {
@@ -21,7 +22,7 @@ namespace Core.VehicleMovement
             public bool steering; // does this wheel apply steer angle?
         }
 
-        public struct InternalPath
+        public class InternalPath
         {
             public float halfHeight;
             private ABPath pathObj;
@@ -376,8 +377,8 @@ namespace Core.VehicleMovement
 
         private void UpdateSteeringDecisionLogic()
         {
-            Debug.Log(targetThrottle);
-            Debug.Log(motor);
+            //Debug.Log(targetThrottle);
+            //Debug.Log(motor);
 
             if (currentPath.ActualPathExists())
             {
@@ -525,9 +526,9 @@ namespace Core.VehicleMovement
 
         }
 
-        private void AskPathTo(Vector3 startPos, Vector3 endPos, bool add, Vector3 endpos, bool okayLookAt, Vector3 toLookAt)
+        private void AskPathTo(Vector3 startPos, Vector3 endPos, bool add, bool okayLookAt, Vector3 toLookAt)
         {
-            Path pp = GetComponent<Seeker>().StartPath(startPos, endPos, (Path p) => currentPath.OnPathReturned(p, add, endpos, okayLookAt, toLookAt));
+            Path pp = GetComponent<Seeker>().StartPath(startPos, endPos, (Path p) => currentPath.OnPathReturned(p, add, endPos, okayLookAt, toLookAt));
             pp.BlockUntilCalculated();
         }
 
@@ -563,7 +564,11 @@ namespace Core.VehicleMovement
                 {
                     startpos = currentPath.LastActualWaypoint;
                 }
-                AskPathTo(startpos, endpos, add, endpos, okayLookAt, toLookAt);
+                //AskPathTo(startpos, endpos, add, okayLookAt, toLookAt);
+
+                OrderContainer oc = new OrderContainer(typeof(MovementOrder), null, new List<OrderReceiver>() { GetComponentInParent<OrderReceiver>() },
+                                                                            new List<object>() { endpos, add, okayLookAt, toLookAt }, -1);
+                GameManager.Instance.currentMainHandler.orderHandler.DispatchOrderContainerToReceivers(oc);
 
                 okayEndpos = false;
             }
@@ -588,7 +593,7 @@ namespace Core.VehicleMovement
             }
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             if(currentPath.ActualPathExists())
             {
