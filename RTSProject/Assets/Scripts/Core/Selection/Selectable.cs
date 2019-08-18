@@ -16,6 +16,9 @@ namespace Core.Selection
     [DisallowMultipleComponent]
     public class Selectable : MonoBehaviour
     {
+
+        [HideInInspector] public Transform RootObject { get { return transform.parent; } }
+
         private MeshesRoot meshesRoot;
         public FactionAffiliation myFactionAffiliation { get; private set; }
         private SelectionCircle selectionIcon;

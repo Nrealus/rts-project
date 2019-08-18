@@ -232,7 +232,7 @@ namespace Core
             var ray = GetComponentsInChildren<Camera>()[0].ScreenPointToRay(myControls.myMousePos);
             RaycastHit hit = new RaycastHit();
 
-            Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Selection Colliders"));
+            Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Selection"));
 
             if (hit.collider == null && collider.Raycast(ray, out hit, Mathf.Infinity))
             {

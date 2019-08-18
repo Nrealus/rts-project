@@ -1,0 +1,282 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3271102624022302813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8112149849441993468}
+  - component: {fileID: 8001916997182506735}
+  - component: {fileID: 8392128062627167837}
+  - component: {fileID: 8392128062627167836}
+  - component: {fileID: 7766920408017551544}
+  - component: {fileID: 497748526078979659}
+  - component: {fileID: 497748526078979658}
+  - component: {fileID: 6011956899460529437}
+  m_Layer: 0
+  m_Name: Movement Control
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8112149849441993468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3271102624022302813}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8001916997182506735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3271102624022302813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e277a27501f811c449f984675fca53de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainRigidBody: {fileID: 0}
+  halfHeight: 0.4
+  halfWidth: 0.8
+  onGround: 0
+  angleController: {fileID: 497748526078979659}
+  angleErrorClampValue: 30
+  anglePIDKmultFromThrottleRatio:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.999851
+      value: 0.17307821
+      inSlope: -0.579272
+      outSlope: -0.579272
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.22910994
+    - serializedVersion: 3
+      time: -0.3194524
+      value: 0.035171717
+      inSlope: 0.2601494
+      outSlope: 0.2601494
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.28329015
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0
+      value: 0.14233398
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.37750483
+      value: 0.08103213
+      inSlope: 0.06719127
+      outSlope: 0.06719127
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.64793795
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.749851
+      value: 0.7213289
+      inSlope: 3.402187
+      outSlope: 3.402187
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18625313
+      outWeight: 0.40431198
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.5544326
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  angularVelocityController: {fileID: 497748526078979658}
+  velocityController: {fileID: 6011956899460529437}
+  maxVelocity: 7
+  _maxAngularVelocity: 1
+  torqueFactor: 0.5
+  accelRate: 20
+  brakeRate: 20
+  minThrottle: -10
+  maxThrottle: 20
+  proximityDistance: 1
+  turnRadiusLowBound: 2
+  turnRadiusHighBound: 3
+  maxDistanceBeforeResettingToClosestWp: 15
+  maxAngleNoReverse: 40
+  maxAngleReverse: 25
+  angleMarginOrientationAtLastWp: 10
+  slipReductionFactor: 1
+--- !u!114 &8392128062627167837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3271102624022302813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 1
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
+--- !u!114 &8392128062627167836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3271102624022302813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  smoothType: 0
+  subdivisions: 6
+  iterations: 2
+  strength: 0.5
+  uniformLength: 1
+  maxSegmentLength: 2
+  bezierTangentLength: 0.4
+  offset: 0.5
+  factor: 0.1
+--- !u!114 &7766920408017551544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3271102624022302813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b090bec917bbe4c3bbc612ef13f7c4a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  useRaycasting: 1
+  mask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  thickRaycast: 1
+  thickRaycastRadius: 1
+  use2DPhysics: 0
+  raycastOffset: {x: 0, y: 0, z: 0}
+  useGraphRaycasting: 1
+  quality: 1
+--- !u!114 &497748526078979659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3271102624022302813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67a8cbbf17e46343b09fc19d73e7e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pidName: Angle
+  Kp: 2
+  Ki: 0.4
+  Kd: 0.2
+  SliderKpMin: 0
+  SliderKpMax: 50
+  SliderKiMin: 0
+  SliderKiMax: 100
+  SliderKdMin: 0
+  SliderKdMax: 1
+  ShowSliderPanel: 0
+  SliderPanelX: 0
+  SliderPanelY: 16
+--- !u!114 &497748526078979658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3271102624022302813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67a8cbbf17e46343b09fc19d73e7e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pidName: Angular velocity
+  Kp: 1
+  Ki: 0
+  Kd: 0
+  SliderKpMin: 0
+  SliderKpMax: 50
+  SliderKiMin: 0
+  SliderKiMax: 100
+  SliderKdMin: 0
+  SliderKdMax: 1
+  ShowSliderPanel: 0
+  SliderPanelX: 0
+  SliderPanelY: 116
+--- !u!114 &6011956899460529437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3271102624022302813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67a8cbbf17e46343b09fc19d73e7e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pidName: Velocity
+  Kp: 1
+  Ki: 0
+  Kd: 0
+  SliderKpMin: 0
+  SliderKpMax: 50
+  SliderKiMin: 0
+  SliderKiMax: 100
+  SliderKdMin: 0
+  SliderKdMax: 1
+  ShowSliderPanel: 0
+  SliderPanelX: 0
+  SliderPanelY: 216

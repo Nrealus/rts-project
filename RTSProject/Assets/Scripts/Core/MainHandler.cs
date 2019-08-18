@@ -9,6 +9,7 @@ namespace Core
         [HideInInspector] public TerrainHandler terrainHandler;
         [HideInInspector] public FactionHandler factionHandler;
         [HideInInspector] public SelectionHandler selectionHandler;
+        [HideInInspector] public OrderHandler orderHandler;
 
         ///<summary>
         /// Called from the monobehaviour awake of the GameManager singleton.
@@ -24,10 +25,12 @@ namespace Core
             factionHandler = FindObjectOfType<FactionHandler>();
             terrainHandler = FindObjectOfType<TerrainHandler>();
             selectionHandler = FindObjectOfType<SelectionHandler>();
+            orderHandler = FindObjectOfType<OrderHandler>();
 
             factionHandler.Init();
             terrainHandler.Init();
             selectionHandler.Init();
+            orderHandler.Init();
 
         }
         private void Update()
