@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Core.AI;
 
 namespace Core.Orders
 {
@@ -8,6 +9,9 @@ namespace Core.Orders
     {
 
         public List<OrderContainer> orderContainerList;
+        public OrderContainer currentOrderContainer;
+
+        //public Intelligence intel;
 
         private void Awake()
         {
@@ -16,7 +20,7 @@ namespace Core.Orders
 
         private void Start()
         {
-
+            //intel = GetComponent<Intelligence>();
         }
 
         private void Update()
@@ -24,16 +28,28 @@ namespace Core.Orders
             OrderContainersProcessing();
         }
 
+        private OrderContainer previousOc;
         private void OrderContainersProcessing()
         {
+            bool b = false;
             foreach (OrderContainer oc in orderContainerList)
             {
-                if(oc.GetCurrentState() == OrderContainer.States.Active)
+                if (oc.GetCurrentStateForOrderReceiver(this) == OrderContainer.OrderStates.Active)
                 {
-                    oc.order.ProcessMe();
+                    b = true;
+                    if (oc != previousOc)
+                    {
+                        previousOc = oc;
+                        currentOrderContainer = oc;
+                        //intel.SetCurrentDecisionMaker(intel.GetDecisionMakerFromOrderType(oc.orderType));
+                    }
+                    break;
                 }
-
-                // TODO : FOR NOW, this will do. But this will definitely change with gameplay requirements and enforced rules.
+            }
+            if (!b)
+            {
+                currentOrderContainer = null;
+                //intel.SetCurrentDecisionMaker(null);
             }
         }
 
@@ -41,12 +57,12 @@ namespace Core.Orders
         {
             switch(oc.placement)
             {
-                case OrderContainer.PlacementTypes.First:
+                case OrderPlacementTypes.First:
                     orderContainerList.Insert(0, oc);
                     break;
-                /*case OrderContainer.PlacementTypes.Second:
+                /*case OrderPlacementTypes.Second:
                     break;*/
-                case OrderContainer.PlacementTypes.Last:
+                case OrderPlacementTypes.Last:
                     orderContainerList.Add(oc);
                     break;
             }

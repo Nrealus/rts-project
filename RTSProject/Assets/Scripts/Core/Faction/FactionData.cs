@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Core.Selection;
+using Core.Selects;
 
 namespace Core.Faction
 {

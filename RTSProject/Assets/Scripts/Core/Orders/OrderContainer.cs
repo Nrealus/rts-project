@@ -6,57 +6,48 @@ using UnityEngine;
 
 namespace Core.Orders
 {
+    public enum OrderPlacementTypes { First, Second, Last }
+    public enum OrderTypes { Null, Movement, Stop, Fire };
 
     public class OrderContainer
     {
-        public List<OrderModifier> modifiers;
 
-        public List<OrderReceiver> orderReceivers;
-
-        public List<object> arguments;
-
+        public OrderTypes orderType;
+        public OrderPlacementTypes placement;
         public float targetTime;
 
-        public enum States { Pending, WaitingUntilDelay, Paused, Active, Cancelled }
-        private StateMachine<States> stateMachine;
+        public enum OrderStates { WaitingUntilStartTime, Pending, Paused, Active, FinishedButWaitingForOthersToFinish }
+        private Dictionary<OrderReceiver, OrderStates> orderStateForReceiver;
+        public Dictionary<OrderReceiver, OrderStates>.KeyCollection orderReceivers { get { return orderStateForReceiver.Keys; } }
 
-        public enum PlacementTypes { First, Second, Last }
-        public PlacementTypes placement;
+        public OrderArgs orderArguments;
 
-        public System.Type orderType;
-        public Order order;
+        public List<OrderModifier> modifiers;
 
-        public OrderContainer Copy()
+        /*public OrderContainer Copy()
         {
-            OrderContainer oc = new OrderContainer(orderType, modifiers, orderReceivers, arguments, targetTime);
+            OrderContainer oc = new OrderContainer(orderType, placement, modifiers, orderReceivers, orderData, targetTime);
             return oc;
-        }
+        }*/
 
-        public OrderContainer(System.Type orderType, List<OrderModifier> modifiers, List<OrderReceiver> orderReceivers, List<object> arguments, float targetTime)
+        public OrderContainer(OrderTypes orderType, OrderPlacementTypes placement, float targetTime, List<OrderReceiver> orderReceivers, OrderArgs orderArguments, List<OrderModifier> modifiers)
         {
 
-            this.modifiers = new List<OrderModifier>(modifiers);
-            this.orderReceivers = new List<OrderReceiver>(orderReceivers);
-            this.arguments = new List<object>(arguments);
+            this.orderType = orderType;
+            this.placement = placement;
             this.targetTime = targetTime;
 
-            stateMachine = new StateMachine<States>();
-            stateMachine.AddState(States.Pending);
-            stateMachine.AddState(States.WaitingUntilDelay, null, WaitingDelayUpdate);
-            stateMachine.AddState(States.Active, InstantiateOrder);
-            stateMachine.AddState(States.Cancelled, DestroyOrder);
+            orderStateForReceiver = new Dictionary<OrderReceiver, OrderStates>();
+            foreach (OrderReceiver or in orderReceivers)
+            {
+                orderStateForReceiver.Add(or, OrderStates.WaitingUntilStartTime);
+            }
 
-            StartAsPending();
-        }
+            this.orderArguments = orderArguments;//.Copy();
+            this.modifiers = modifiers;// new List<OrderModifier>(modifiers);
+            //this.orderReceivers = new List<OrderReceiver>(orderReceivers);
 
-        public void StartAsPending()
-        {
-            stateMachine.CurrentState = States.Pending;
-        }
-
-        public void FromPendingToCountdown()
-        {
-            stateMachine.CurrentState = States.WaitingUntilDelay;
+            ActivateOrderForReceivers(); // Testing purposes
         }
 
         public void SetAsPaused()
@@ -64,38 +55,33 @@ namespace Core.Orders
 
         }
 
-        private void WaitingDelayUpdate()
+        private void ActivateOrderForReceivers()
         {
-            if (Time.time <= targetTime) //  TODO : this should and will be obviously changed
+            foreach (OrderReceiver or in orderReceivers)
             {
-                stateMachine.CurrentState = States.Active;
+
+                // THERE WILL PROBABLY BE CONDITIONS COMING FROM MODIFIERS
+                // for example, checking if all receivers have finished their current orders, if the modifier wants to wait until all receivers are "ready" so they start simultaneously
+                orderStateForReceiver[or] = OrderStates.Active;
             }
         }
 
-        private void DestroyOrder()
+        private void CheckTargetTimePassed()
         {
-            order = null;
-        }
-
-        private void InstantiateOrder()
-        {
-            //order = new Order(modifiers, /*targetedReceivers,*/ arguments);
-
-            var constructorInfo = orderType.GetConstructor(new[] { typeof(List<OrderModifier>), typeof(List<OrderReceiver>) });
-            if (constructorInfo != null)
+            if (true/*Time.time >= targetTime*/) //  TODO : Not Time.time of course but something else
             {
-                object[] parameters = new object[] { modifiers, orderReceivers };
-                order = (Order)constructorInfo.Invoke(parameters);
+                foreach (OrderReceiver or in orderReceivers)
+                {
+                    orderStateForReceiver[or] = OrderStates.Pending;
+                }
             }
-
-            //order = ((T)new Order(modifiers, arguments));
-            //order.Init();
         }
 
-        public States GetCurrentState()
+        public OrderStates GetCurrentStateForOrderReceiver(OrderReceiver or)
         {
-            return stateMachine.CurrentState;
+            return orderStateForReceiver[or];
         }
 
     }
+
 }

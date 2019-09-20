@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GlobalManagers;
 
-namespace Core.Selection
+namespace Core.Selects
 {
     public class SelectionCircle : MonoBehaviour
     {

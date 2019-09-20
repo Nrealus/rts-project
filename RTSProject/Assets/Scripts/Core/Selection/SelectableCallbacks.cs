@@ -5,7 +5,7 @@ using Core;
 using GlobalManagers;
 using System.Linq;
 
-namespace Core.Selection
+namespace Core.Selects
 {
     public class SelectableCallbacks
     {

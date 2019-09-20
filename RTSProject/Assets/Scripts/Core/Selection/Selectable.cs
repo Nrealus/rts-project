@@ -7,7 +7,7 @@ using Core.Faction;
 using Core.Helpers;
 using OutlineGraphical;
 
-namespace Core.Selection
+namespace Core.Selects
 {
     /// <summary>
     /// Allows to an object to be selected, typically (or even only ?) a unit.

@@ -5,7 +5,7 @@ using UnityEngine;
 using UtilsAndExts;
 using Core.Helpers;
 
-namespace Core.Selection
+namespace Core.Selects
 {
     public class Selector : MonoBehaviour
     {
