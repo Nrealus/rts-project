@@ -1,4 +1,4 @@
-**An old and unsupported repository of a Unity 3D project that don't remember that much about**
+**An old and unsupported repository of a Unity 3D project that I don't remember that much about**
 
 The main point of interest of the project was wheeled vehicle pathfinding and locomotion (pathtracking) in 3D using forces and colliders.
 So although the subject is more or less related to autonomous vehicles, the "demo application" of is a sort of RTS unit movement command scenario.
