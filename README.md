@@ -1,5 +1,3 @@
-# rts-wheeled-vehicle-control
-
 **An old and unsupported repository of a Unity 3D project that don't remember so many things about**
 
 The main point of interest of the project was wheeled vehicle pathfinding and locomotion (pathtracking) in 3D using forces and colliders.
